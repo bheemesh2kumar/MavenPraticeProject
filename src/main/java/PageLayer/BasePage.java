@@ -1,6 +1,7 @@
 package PageLayer;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.InvalidSelectorException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedCondition;
@@ -28,7 +29,7 @@ public class BasePage extends Page {
         try {
             ele = driver.findElement(locator);
 
-        } catch (Exception ex) {
+        } catch (InvalidSelectorException ex) {
             ex.printStackTrace();
             System.out.println("element is not initilized");
         }
@@ -47,5 +48,30 @@ public class BasePage extends Page {
         }
 
     }
+
+    @Override
+    public void doClick(By locator) {
+        try {
+            getElement(locator).click();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            System.out.println("some issue while loading element" + locator.toString());
+        }
+
+    }
+
+    @Override
+    public void doSendKeys(By locator, String str) {
+        try {
+            getElement(locator).sendKeys(str);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            System.out.println("some issue while loading element" + locator.toString());
+        }
+
+
+    }
+
+
 }
 

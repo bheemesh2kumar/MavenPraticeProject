@@ -5,6 +5,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.time.Duration;
+
 public abstract class Page {
 
     public WebDriver driver;
@@ -12,7 +14,7 @@ public abstract class Page {
 
     public Page(WebDriver driver) {
         this.driver = driver;
-        wait = new WebDriverWait(driver, 20);
+        wait = new WebDriverWait(driver, Duration.ofSeconds(10));
     }
 
 
@@ -23,6 +25,10 @@ public abstract class Page {
     public abstract WebElement getElement(By locator);
 
     public abstract void waitforWebElement(By locator);
+
+    public abstract void doClick(By locator);
+
+    public abstract void doSendKeys(By locator, String str);
 
     public <Tpage extends BasePage> Tpage getInstance(Class<Tpage> pageref) {
         try {
